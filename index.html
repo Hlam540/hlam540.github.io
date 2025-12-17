@@ -1,71 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Hung Lam | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
+      max-width: 920px;
+      margin: 48px auto;
       padding: 0 20px;
-      color: #222;
-      line-height: 1.6;
+      color: #1f2328;
+      line-height: 1.65;
     }
-    h1, h2 {
-      color: #111;
+    h1 { margin-bottom: 6px; font-size: 2.1rem; }
+    .subtitle { margin-top: 0; color: #57606a; }
+    h2 { margin-top: 34px; font-size: 1.35rem; }
+    .links a { margin-right: 14px; }
+    a { color: #0969da; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .card {
+      border: 1px solid #d0d7de;
+      border-radius: 10px;
+      padding: 16px 16px;
+      margin: 14px 0;
+      background: #fff;
     }
-    .project {
-      margin-bottom: 24px;
+    .card-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
-    a {
-      color: #0366d6;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+    .tagline { color: #57606a; margin: 0; }
+    ul { margin-top: 10px; margin-bottom: 0; padding-left: 18px; }
+    .meta { color: #57606a; font-size: 0.95rem; }
   </style>
 </head>
 <body>
 
   <h1>Hung Lam</h1>
-  <p><strong>Computer Science & Economics @ UVA</strong><br>
-     Software Engineering • Data Analysis • Systems</p>
+  <p class="subtitle"><strong>Computer Science & Economics @ University of Virginia</strong> • Echols Scholar • GPA: 3.9</p>
+
+  <p class="links">
+    <a href="mailto:zyc6kq@virginia.edu">zyc6kq@virginia.edu</a>
+    <span class="meta">|</span>
+    <span>540-537-9050</span>
+    <span class="meta">|</span>
+    <a href="https://www.linkedin.com/in/hung-lam-2892a7204/" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="meta">|</span>
+    <a href="https://github.com/Hlam540" target="_blank" rel="noopener">GitHub</a>
+  </p>
 
   <h2>About</h2>
   <p>
-    I’m a Computer Science and Economics student at the University of Virginia and an Echols Scholar.
-    I enjoy building reliable software systems, data pipelines, and tools that solve real-world problems.
+    I’m a UVA student double majoring in Computer Science and Economics. I enjoy building reliable software systems and
+    automated data pipelines—especially tools that turn messy real-world data into clear, usable outputs.
+    I’m comfortable working in Linux environments and enjoy collaborating in team-based development settings.
   </p>
 
-  <h2>Projects</h2>
+  <h2>Key Projects</h2>
 
-  <div class="project">
-    <strong>VT-MEMS Data Analysis Tool</strong><br>
-    Python-based research tool that automated penetration efficiency calculations by processing 100k+ rows of experimental data,
-    reducing analysis time from hours to minutes.<br>
-    <a href="https://github.com/Hlam540/VT-MEMS-Data-Analysis-Tool" target="_blank">View on GitHub</a>
+  <div class="card">
+    <div class="card-title">
+      <span>VT MEMS Lab — Data Automating Tool (Python)</span>
+      <a href="https://github.com/Hlam540/VT-MEMS-Data-Analysis-Tool" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <p class="tagline">Automated cyclone penetration efficiency calculations using GRIMM + SEMS experimental data.</p>
+    <ul>
+      <li>Built Python scripts for size-bin alignment, interpolation, correction factors, and semi-log plotting.</li>
+      <li>Converted manual Excel workflows into a fully automated pipeline to improve accuracy and reproducibility.</li>
+      <li>Worked with 100,000+ rows of real lab data as part of research workflows.</li>
+    </ul>
   </div>
 
-  <div class="project">
-    <strong>Course Reviews Application</strong><br>
-    JavaFX + SQLite application featuring authentication, search, persistent storage, and MVC-style architecture.<br>
-    <a href="https://github.com/Hlam540" target="_blank">View on GitHub</a>
+  <div class="card">
+    <div class="card-title">
+      <span>Course Reviews Application (JavaFX + SQLite)</span>
+      <a href="https://github.com/Hlam540" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <p class="tagline">Desktop app for login, course search, and review management with persistent storage.</p>
+    <ul>
+      <li>Designed an interactive JavaFX GUI with view navigation and controller-based structure.</li>
+      <li>Implemented an SQLite database and custom DAO classes for secure, persistent data storage.</li>
+      <li>Focused on clean organization and maintainability (MVC-style architecture).</li>
+    </ul>
   </div>
 
-  <div class="project">
-    <strong>Budget Tracker</strong><br>
-    Java-based budgeting tool with file I/O, transaction management, and object-oriented design.<br>
-    <a href="https://github.com/Hlam540/Girls-Hoos-Hack-Budget-Tracker" target="_blank">View on GitHub</a>
+  <div class="card">
+    <div class="card-title">
+      <span>Budget Tracker (Java)</span>
+      <a href="https://github.com/Hlam540/Girls-Hoos-Hack-Budget-Tracker" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <p class="tagline">Terminal-based budgeting tool for tracking transactions with long-term persistence.</p>
+    <ul>
+      <li>Built features to add, edit, and track transactions through a CLI interface.</li>
+      <li>Implemented file I/O for long-term data persistence.</li>
+      <li>Strengthened object-oriented design and Java proficiency.</li>
+    </ul>
   </div>
 
-  <h2>Contact</h2>
-  <p>
-    Email: zyc6kq@virginia.edu<br>
-    GitHub: <a href="https://github.com/Hlam540">github.com/Hlam540</a><br>
-    LinkedIn: (add if you want)
+  <h2>Skills</h2>
+  <p class="meta">
+    <strong>Languages:</strong> Python, Java, SQL, HTML/CSS<br />
+    <strong>Tools/Frameworks:</strong> JavaFX, SQLite, Git/GitHub<br />
+    <strong>Concepts:</strong> Data pipelines, JUnit testing, OOP, automation, debugging, refactoring, GUI design, data parsing, semi-log plots
   </p>
 
 </body>
