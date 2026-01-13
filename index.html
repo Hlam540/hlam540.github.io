@@ -6,13 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --ink: #1f1913;
-      --muted: #5b4c40;
-      --accent: #a03f2c;
-      --paper: #f6efe6;
+      --ink: #1b1c22;
+      --muted: #50515b;
+      --accent: #ff7b3d;
+      --accent-dark: #c4541a;
+      --cool: #2c3a8c;
+      --paper: #f6f3ee;
       --card: #ffffff;
-      --line: #e2d5c6;
-      --shadow: 0 20px 44px rgba(31, 25, 19, 0.14);
+      --line: rgba(27, 28, 34, 0.12);
+      --shadow: 0 24px 60px rgba(27, 28, 34, 0.15);
     }
 
     * {
@@ -24,185 +26,307 @@
       color: var(--ink);
       background-color: var(--paper);
       background-image:
-        radial-gradient(circle at 10% 10%, rgba(160, 63, 44, 0.08), transparent 38%),
-        radial-gradient(circle at 90% 20%, rgba(31, 25, 19, 0.08), transparent 40%),
-        repeating-linear-gradient(135deg, rgba(31, 25, 19, 0.03), rgba(31, 25, 19, 0.03) 2px, transparent 2px, transparent 10px);
-      font-family: "Avenir Next", "Avenir", "Trebuchet MS", "Lucida Grande", sans-serif;
+        radial-gradient(circle at 10% 20%, rgba(255, 123, 61, 0.18), transparent 40%),
+        radial-gradient(circle at 90% 0%, rgba(44, 58, 140, 0.14), transparent 45%),
+        linear-gradient(135deg, rgba(27, 28, 34, 0.04), transparent 60%);
+      font-family: "Segoe UI", "Trebuchet MS", "Gill Sans", sans-serif;
       line-height: 1.6;
     }
 
-    .page {
-      max-width: 980px;
-      margin: 48px auto 80px;
-      padding: 36px 36px 50px;
-      background: var(--card);
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .page::after {
+    .page {
+      max-width: 1120px;
+      margin: 40px auto 80px;
+      padding: 0 22px 60px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 28px;
+      align-items: center;
+      padding: 30px 32px;
+      background: var(--card);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero::before {
       content: "";
       position: absolute;
-      inset: 14px;
-      border: 1px solid rgba(160, 63, 44, 0.12);
-      border-radius: 14px;
+      inset: -60px auto auto -120px;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(255, 123, 61, 0.26), transparent 70%);
+      opacity: 0.8;
       pointer-events: none;
     }
 
-    header.hero {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 18px;
-      margin-bottom: 24px;
-      border-bottom: 2px solid var(--line);
-      animation: fadeUp 0.8s ease forwards;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -140px -100px auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(44, 58, 140, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
     }
 
     .kicker {
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       font-size: 0.7rem;
-      color: var(--accent);
-      margin: 0 0 6px;
+      color: var(--accent-dark);
+      margin: 0 0 10px;
+      font-weight: 600;
     }
 
     h1 {
-      margin: 0 0 6px;
-      font-size: 2.6rem;
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+      margin: 0 0 10px;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-family: "Georgia", "Times New Roman", serif;
     }
 
     .subtitle {
-      margin: 0;
+      margin: 0 0 18px;
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: 1.08rem;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.7);
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(27, 28, 34, 0.12);
+    }
+
+    .pill.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+    }
+
+    .headshot {
+      width: min(320px, 100%);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 26px;
+      border: 8px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 18px 44px rgba(27, 28, 34, 0.18);
     }
 
     .contact {
       display: grid;
       gap: 6px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--muted);
-      text-align: right;
+      text-align: center;
     }
 
-    .contact a {
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    main section {
-      padding: 14px 0 4px;
+    .section {
+      margin-top: 40px;
       animation: fadeUp 0.7s ease forwards;
       opacity: 0;
       transform: translateY(14px);
     }
 
-    main section:nth-of-type(1) { animation-delay: 0.1s; }
-    main section:nth-of-type(2) { animation-delay: 0.2s; }
-    main section:nth-of-type(3) { animation-delay: 0.3s; }
-    main section:nth-of-type(4) { animation-delay: 0.4s; }
+    .section:nth-of-type(2) { animation-delay: 0.1s; }
+    .section:nth-of-type(3) { animation-delay: 0.2s; }
+    .section:nth-of-type(4) { animation-delay: 0.3s; }
+    .section:nth-of-type(5) { animation-delay: 0.4s; }
 
-    h2 {
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.8rem;
+      color: var(--accent-dark);
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 20px 22px;
+      background: var(--card);
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 36px rgba(27, 28, 34, 0.08);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      font-size: 0.88rem;
-      color: var(--accent);
-      margin: 0 0 14px;
     }
 
-    .item {
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
+    .highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 123, 61, 0.12);
+      color: var(--accent-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 10px;
     }
 
-    .item:last-child {
-      border-bottom: none;
-    }
-
-    .item-title {
+    .stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 0.85rem;
+      background: #fff;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .about-callout {
+      background: linear-gradient(135deg, rgba(255, 123, 61, 0.16), rgba(44, 58, 140, 0.12));
+      padding: 18px;
+      border-radius: 16px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .experience-item {
+      display: grid;
+      gap: 8px;
+    }
+
+    .experience-title {
+      display: flex;
       justify-content: space-between;
+      gap: 12px;
       font-weight: 700;
-      font-size: 1.02rem;
     }
 
-    .item-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: space-between;
+    .experience-role {
       color: var(--muted);
       font-size: 0.95rem;
-      margin-top: 2px;
-    }
-
-    .tagline {
-      color: var(--muted);
-      margin: 8px 0 0;
     }
 
     ul {
-      margin: 10px 0 0;
+      margin: 0;
       padding-left: 18px;
     }
 
     li {
-      margin: 4px 0;
+      margin: 6px 0;
     }
 
-    .skills {
-      display: grid;
-      gap: 12px;
-    }
-
-    .skills strong {
-      color: var(--ink);
-      display: inline-block;
-      min-width: 170px;
-    }
-
-    .skills span {
+    footer {
+      margin-top: 50px;
+      text-align: center;
       color: var(--muted);
     }
 
-    @media (max-width: 720px) {
-      .page {
-        margin: 24px 16px 48px;
-        padding: 28px 22px 36px;
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
       }
 
-      header.hero {
-        align-items: flex-start;
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .grid.two,
+      .grid.three {
+        grid-template-columns: 1fr;
       }
 
       .contact {
         text-align: left;
       }
-
-      .item-title,
-      .item-meta {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .skills strong {
-        min-width: auto;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      header.hero,
-      main section {
+      .hero,
+      .section {
         animation: none;
         opacity: 1;
         transform: none;
@@ -224,113 +348,150 @@
 <body>
   <div class="page">
     <header class="hero">
-      <div>
-        <p class="kicker">Portfolio Resume</p>
+      <div class="hero-text">
+        <p class="kicker">Portfolio</p>
         <h1>Hung Lam</h1>
-        <p class="subtitle">Computer Science and Economics - University of Virginia</p>
+        <p class="subtitle">Software engineer who loves building reliable pipelines, data-heavy tools, and clean interfaces.</p>
+        <div class="hero-links">
+          <a class="pill primary" href="mailto:hung.lam540@gmail.com">Email me</a>
+          <a class="pill" href="https://github.com/Hlam540" target="_blank" rel="noopener">GitHub</a>
+          <a class="pill" href="https://www.linkedin.com/in/hlam540" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
       </div>
-      <div class="contact">
-        <div><a href="tel:540-537-9050">540-537-9050</a></div>
-        <div><a href="mailto:hung.lam540@gmail.com">hung.lam540@gmail.com</a></div>
-        <div><a href="https://www.linkedin.com/in/hlam540" target="_blank" rel="noopener">linkedin.com/in/hlam540</a></div>
-        <div><a href="https://github.com/Hlam540" target="_blank" rel="noopener">github.com/Hlam540</a></div>
+      <div class="hero-card">
+        <img class="headshot" src="assets/headshot.jpg" alt="Hung Lam headshot" />
+        <div class="contact">
+          <div><a href="tel:540-537-9050">540-537-9050</a></div>
+          <div><a href="mailto:hung.lam540@gmail.com">hung.lam540@gmail.com</a></div>
+          <div>UVA Computer Science and Economics</div>
+        </div>
       </div>
     </header>
 
     <main>
-      <section>
-        <h2>Education</h2>
-        <div class="item">
-          <div class="item-title">
+      <section class="section">
+        <div class="section-title">About</div>
+        <div class="card about">
+          <div>
+            <h3>Building tools that turn messy data into clear decisions.</h3>
+            <p>
+              I am a UVA student double majoring in Computer Science and Economics. I enjoy shipping
+              dependable systems that make real-world data usable, from lab instrumentation pipelines
+              to risk analytics dashboards.
+            </p>
+            <div class="highlight">Currently open to software engineering internships.</div>
+          </div>
+          <div class="about-callout">
+            Projects span fraud analytics, lab automation, and full-stack apps with thoughtful UX.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Selected Work</div>
+        <div class="grid two">
+          <div class="card">
+            <div class="meta">AccessFlow</div>
+            <h3>Access-request management platform</h3>
+            <p>Full-stack system replacing ad-hoc approvals with auditable, policy-driven workflows.</p>
+            <ul>
+              <li>Django REST endpoints for approvals, role-based access, and expirations.</li>
+              <li>React interface for request submission and status tracking.</li>
+              <li>Automatic time-bound access with persistent audit logs.</li>
+            </ul>
+            <div class="stack">
+              <span class="chip">Python</span>
+              <span class="chip">Django</span>
+              <span class="chip">React</span>
+              <span class="chip">SQLite</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="meta">CourseReviews</div>
+            <h3>Desktop app for course discovery</h3>
+            <p>JavaFX app with clean MVC architecture and transactional data storage.</p>
+            <ul>
+              <li>Authentication, search, and review management with robust UI flows.</li>
+              <li>Controller and service layers split for maintainability.</li>
+              <li>Custom DAO abstractions with SQLite persistence.</li>
+            </ul>
+            <div class="stack">
+              <span class="chip">Java</span>
+              <span class="chip">JavaFX</span>
+              <span class="chip">SQLite</span>
+              <span class="chip">MVC</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Experience</div>
+        <div class="grid two">
+          <div class="card experience-item">
+            <div class="experience-title">
+              <span>Zbooni</span>
+              <span>Dec 2025 - Jan 2026</span>
+            </div>
+            <div class="experience-role">Software Engineer Intern (J-Term) - Dubai, UAE</div>
+            <ul>
+              <li>Built a Python/Django risk dashboard for real-time order verification at 2,000 orders per day.</li>
+              <li>Designed a configurable fraud risk engine combining heuristics, geolocation, and anomaly detection.</li>
+              <li>Processed 1M+ historical orders with pandas and SQLite to guide production rollout.</li>
+            </ul>
+          </div>
+          <div class="card experience-item">
+            <div class="experience-title">
+              <span>Virginia Microelectronics Consortium</span>
+              <span>May 2025 - Aug 2025</span>
+            </div>
+            <div class="experience-role">Software Engineer Intern - Blacksburg, VA</div>
+            <ul>
+              <li>Automated 100,000+ rows of GRIMM and SEMS data, cutting processing from hours to minutes.</li>
+              <li>Built modular analyzers with Python, pandas, and openpyxl.</li>
+              <li>Developed Arduino firmware and mobile data transfer workflows for lab experiments.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Skills</div>
+        <div class="grid three">
+          <div class="card">
+            <h3>Languages</h3>
+            <p>Python, Java, JavaScript, SQL, C, R, HTML, CSS</p>
+          </div>
+          <div class="card">
+            <h3>Frameworks</h3>
+            <p>React.js, Next.js, Node.js, Express.js, Django, Django REST Framework, JavaFX, JUnit</p>
+          </div>
+          <div class="card">
+            <h3>Tools + Data</h3>
+            <p>AWS, Git, CI/CD, Bash, PowerShell, Linux, Gradle, PostgreSQL, MySQL, SQLite</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Education</div>
+        <div class="card">
+          <div class="experience-title">
             <span>University of Virginia, College of Arts and Sciences</span>
             <span>Aug 2023 - May 2027</span>
           </div>
-          <div class="item-meta">
-            <span>Bachelor of Arts in Computer Science and Economics</span>
-            <span>Charlottesville, VA</span>
-          </div>
+          <p class="experience-role">Bachelor of Arts in Computer Science and Economics - Charlottesville, VA</p>
           <ul>
             <li>Cumulative GPA: 3.91/4.00 (Dean's List Honors).</li>
-            <li>Involvements: Project Code at UVA, Echols Scholar, Hoos First, HooHacks, UVA Club Running (Marathon Finisher), VSA, QYFA, Elizabeth White Barr Scholar ($7,000), Outside Scholarships Awarded ($13,000).</li>
+            <li>Involvements: Project Code at UVA, Echols Scholar, Hoos First, HooHacks, UVA Club Running, VSA, QYFA.</li>
           </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2>Experience</h2>
-        <div class="item">
-          <div class="item-title">
-            <span>Zbooni</span>
-            <span>Dec 2025 - Jan 2026</span>
-          </div>
-          <div class="item-meta">
-            <span>Software Engineer Intern (J-Term)</span>
-            <span>Dubai, UAE</span>
-          </div>
-          <ul>
-            <li>Built a Python/Django internal risk dashboard to simulate real-time order verification for a connected-commerce platform processing 2,000 orders/day and $800K GMV.</li>
-            <li>Engineered a configurable fraud risk-scoring engine using email heuristics, rule-based analytics, geolocation intelligence, behavioral velocity detection, and anomaly detection, achieving a 193 ms average per-order runtime.</li>
-            <li>Externalized fraud logic into configurable, non hard-coded JSON configurations, enabling rapid tuning of thresholds and weights.</li>
-            <li>Developed pandas and SQLite ingestion and simulation pipelines over 1M+ historical orders spanning 2 years to quantify fraud catch-rate vs false-positive tradeoffs and guide production rollout.</li>
-          </ul>
-        </div>
-
-        <div class="item">
-          <div class="item-title">
-            <span>Virginia Microelectronics Consortium (VMEC)</span>
-            <span>May 2025 - Aug 2025</span>
-          </div>
-          <div class="item-meta">
-            <span>Software Engineer Intern</span>
-            <span>Blacksburg, VA</span>
-          </div>
-          <ul>
-            <li>Built automated data analysis pipelines for 100,000+ rows of GRIMM and SEMS experimental data, cutting processing from hours to minutes and streamlining lab workflows.</li>
-            <li>Implemented modular readers and analyzers using Python, pandas, and openpyxl to parse time-stamped sensor logs, compute upstream and downstream averages, and apply calibration factors.</li>
-            <li>Designed a mobile-integrated workflow for a Micro GC analyzer enabling real-time data transfer to smartphones to support field experiments and rapid analysis.</li>
-            <li>Developed Arduino firmware with structured control logic to interface with laboratory hardware, manage sensor I/O, and automate experimental workflows.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2>Projects</h2>
-        <div class="item">
-          <div class="item-title">
-            <span>AccessFlow</span>
-            <span>Python, Django, React, REST APIs, SQLite</span>
-          </div>
-          <ul>
-            <li>Built a full-stack internal access-request management system to replace ad-hoc email and chat approvals with auditable, policy-driven workflows.</li>
-            <li>Designed Django REST endpoints for submitting, approving, denying, and expiring access requests with role-based authorization and approval routing.</li>
-            <li>Implemented a React frontend for request submission and status tracking, integrating with backend APIs for real-time updates.</li>
-            <li>Enforced time-bound access controls with automatic expiration and persistent audit logs to support compliance and security reviews.</li>
-          </ul>
-        </div>
-
-        <div class="item">
-          <div class="item-title">
-            <span>CourseReviews</span>
-            <span>Java, JavaFX, SQLite, MVC Architecture</span>
-          </div>
-          <ul>
-            <li>Built a desktop application using JavaFX following MVC architecture supporting user authentication, course search, and review management.</li>
-            <li>Designed modular controller and service layers to separate UI logic from business logic, improving maintainability and feature extensibility.</li>
-            <li>Implemented persistent storage with SQLite and custom DAO abstractions to manage users, courses, and reviews with transactional integrity.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2>Skills</h2>
-        <div class="skills">
-          <div><strong>Programming Languages:</strong> <span>Python, Java, JavaScript, SQL, C, R, HTML, CSS</span></div>
-          <div><strong>Frameworks/Libraries:</strong> <span>React.js, Next.js, Node.js, Express.js, Django, Django REST Framework, JavaFX, JUnit, pandas, openpyxl</span></div>
-          <div><strong>DevOps:</strong> <span>AWS, Git, CI/CD, Bash Scripting, PowerShell, Linux, Gradle</span></div>
-          <div><strong>Databases:</strong> <span>PostgreSQL, MySQL, SQLite</span></div>
         </div>
       </section>
     </main>
+
+    <footer>
+      Built with HTML and CSS. Looking for internships and full-stack roles.
+    </footer>
   </div>
 </body>
 </html>
